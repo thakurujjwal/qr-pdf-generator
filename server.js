@@ -9,6 +9,11 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(cors());
 
+app.get('/', (req, res) => {
+    res.send('Welcome to the QR Code Generator API');
+});
+
+
 app.post('/api/generate-qrs', async (req, res) => {
     try {
         const { x } = req.body;
