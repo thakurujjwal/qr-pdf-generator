@@ -24,7 +24,7 @@ app.post('/api/generate-qrs', async (req, res) => {
         const qrCodes = [];
         for (let i = 1; i <= x.TotQty; i++) {
             const qrNumber = String(i).padStart(7, '0');
-            const qrData = `QR${qrNumber} ! ${x.PNo} ! ${x.StyleCode} ! ${x.Color} ! ${x.Size}`;
+            const qrData = `QR${qrNumber} ! ${x.PNo} ! ${x.StyleCode} ! ${x.Color} ! ${x.Size} QR-QTY ${x.TotQty}`;
             const qrCode = await QRCode.toDataURL(qrData);
             qrCodes.push({ data: qrData, qrCode });
         }
