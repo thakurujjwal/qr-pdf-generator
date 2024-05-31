@@ -21,13 +21,14 @@ app.post('/api/generate-qrs', async (req, res) => {
         }
 
         const pageWidth = 12 * 72;
-        const pageHeight = 1200;
+        const pageHeight = 1250;
         const qrBoxWidth = 84;
         const qrBoxHeight = 200;
         const qrWidth = 84;
         const qrHeight = 84;
         const paddingX = 36;
         const paddingY = 36;
+
         const qrPerRow = 7;
         const qrPerColumn = 5;
         const qrPerPage = qrPerRow * qrPerColumn;
@@ -39,11 +40,13 @@ app.post('/api/generate-qrs', async (req, res) => {
         });
         doc.pipe(res);
 
-        for (let page = 0; page * qrPerPage < x.TotQty; page++) {
+        // Loop through pages
+        for (let pageIndex = 0; pageIndex * qrPerPage < x.TotQty; pageIndex++) {
             doc.addPage({ size: [pageWidth, pageHeight] });
 
-            for (let i = 0; i < qrPerPage && (page * qrPerPage + i) < x.TotQty; i++) {
-                const qrIndex = page * qrPerPage + i + 1;
+            // Loop through QR codes on the current page
+            for (let i = 0; i < qrPerPage && (pageIndex * qrPerPage + i) < x.TotQty; i++) {
+                const qrIndex = pageIndex * qrPerPage + i + 1;
                 const qrNumber = String(qrIndex).padStart(7, '0');
                 const qrData = `QR${qrNumber} ! ${x.PNo} ! ${x.StyleCode} ! ${x.Color} ! ${x.Size} `;
                 const qrCode = await QRCode.toDataURL(qrData);
