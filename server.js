@@ -24,19 +24,19 @@ app.post('/api/generate-qrs', async (req, res) => {
         const qrCodes = [];
         for (let i = 1; i <= x.TotQty; i++) {
             const qrNumber = String(i).padStart(7, '0');
-            const qrData = `QR${qrNumber} ! ${x.PNo} ! ${x.StyleCode} ! ${x.Color} ! ${x.Size} QR-QTY ${x.TotQty}`;
+            const qrData = `QR${qrNumber} ! ${x.PNo} ! ${x.StyleCode} ! ${x.Color} ! ${x.Size} `;
             const qrCode = await QRCode.toDataURL(qrData);
             qrCodes.push({ data: qrData, qrCode });
         }
 
-        const pageWidth = 12 * 72;    
-        const pageHeight = 1200; 
-        const qrBoxWidth = 84;          
-        const qrBoxHeight = 200;       
-        const qrWidth = 84;            
-        const qrHeight = 84;            
-        const paddingX = 36;           
-        const paddingY = 36;            
+        const pageWidth = 12 * 72;
+        const pageHeight = 1200;
+        const qrBoxWidth = 84;
+        const qrBoxHeight = 200;
+        const qrWidth = 84;
+        const qrHeight = 84;
+        const paddingX = 36;
+        const paddingY = 36;
 
         const doc = new PDFDocument({ autoFirstPage: false });
         let buffers = [];
@@ -45,7 +45,7 @@ app.post('/api/generate-qrs', async (req, res) => {
             const pdfData = Buffer.concat(buffers);
             res.writeHead(200, {
                 'Content-Type': 'application/pdf',
-                'Content-Disposition': `attachment; filename="${x.PNo}-${x.StyleCode}-${x.Color}-${x.Size}.pdf"`,
+                'Content-Disposition': `attachment; filename="${x.PNo}-${x.StyleCode}-${x.Color}-${x.Size}-QR QTY ${x.TotQty}.pdf"`,
                 'Content-Length': pdfData.length
             });
             res.end(pdfData);
