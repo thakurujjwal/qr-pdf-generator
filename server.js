@@ -25,15 +25,15 @@ app.post('/api/generate-qrs', async (req, res) => {
         const pageWidth = 841.89;
         const pageHeight = 1190.55;
 
-        const qrBoxWidth = 60; // Adjust QR box width to fit 10 QR codes in a row
-        const qrBoxHeight = 200; // Adjust QR box height to fit desired spacing
+        const qrBoxWidth = 60; 
+        const qrBoxHeight = 200; 
         const qrWidth = 70;
         const qrHeight = 70;
-        const paddingX = 30; // Adjust padding as necessary
+        const paddingX = 30; 
         const paddingY = 30;
 
-        const qrPerRow = 10; // 10 QR codes per row
-        const qrPerColumn = 5; // Calculate based on desired height and spacing
+        const qrPerRow = 10;
+        const qrPerColumn = 5;
         const qrPerPage = qrPerRow * qrPerColumn;
 
         const doc = new PDFDocument({ autoFirstPage: false });
