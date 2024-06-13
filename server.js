@@ -55,8 +55,8 @@ app.post('/api/generate-qrs', async (req, res) => {
                 const qrIndex = pageIndex * qrPerPage + i + 1;
                 const qrNumber = String(qrIndex).padStart(7, '0');
                 const qrData = `QR${qrNumber} ! ${x.PNo} ! ${x.StyleCode} ! ${x.Color} ! ${x.Size} `;
-                // const qrCode = await QRCode.toDataURL(qrData);
-                const qrCode = await QRCode.toDataURL(qrData, { width: 1080, margin: 1 });
+                const qrCode = await QRCode.toDataURL(qrData);
+                // const qrCode = await QRCode.toDataURL(qrData, { width: 1080, margin: 1 });
 
                 const row = Math.floor(i / qrPerRow);
                 const col = i % qrPerRow;
